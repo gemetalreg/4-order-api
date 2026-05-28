@@ -1,7 +1,6 @@
 package product
 
 import (
-	"fmt"
 	"net/http"
 	"order/api/pkg/req"
 	"order/api/pkg/res"
@@ -105,6 +104,6 @@ func (handler *ProductHandler) Read() http.HandlerFunc {
 			http.Error(w, err.Error(), http.StatusNotFound)
 			return
 		}
-		fmt.Fprint(w, product)
+		res.Json(w, product, 200)
 	}
 }
