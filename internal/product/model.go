@@ -14,11 +14,14 @@ type Product struct {
 	Images      pq.StringArray `json:"images" gorm:"type:text[]"`
 }
 
-func NewProduct() *Product {
-	return &Product{}
+func NewProduct(name, description string) *Product {
+	return &Product{
+		Name:        name,
+		Description: description,
+	}
 }
 
-var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 
 func RandStringRunes(n int) string {
 	b := make([]rune, n)

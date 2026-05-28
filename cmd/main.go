@@ -5,15 +5,23 @@ import (
 	"net/http"
 	"order/api/configs"
 	"order/api/internal/auth"
+	"order/api/internal/product"
 	"order/api/pkg/db"
 )
 
 func main() {
 	conf := configs.LoadConfig()
-	_ = db.NewDb(conf)
+	database := db.NewDb(conf)
 	router := http.NewServeMux()
+
+	productRepository := product.NewProductRepository(database)
+
 	auth.NewAuthHandler(router, auth.AuthHandlerDeps{
 		Config: conf,
+	})
+
+	product.NewProductHandler(router, product.ProductHandlerDeps{
+		ProductRepository: productRepository,
 	})
 
 	server := http.Server{
