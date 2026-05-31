@@ -6,6 +6,7 @@ import (
 	"order/api/configs"
 	"order/api/internal/auth"
 	"order/api/internal/product"
+	"order/api/middleware"
 	"order/api/pkg/db"
 )
 
@@ -26,7 +27,7 @@ func main() {
 
 	server := http.Server{
 		Addr:    ":8081",
-		Handler: router,
+		Handler: middleware.Logging(router),
 	}
 
 	fmt.Println("Server is listeting on port 8081")
