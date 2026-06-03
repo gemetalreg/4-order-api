@@ -18,3 +18,4 @@ type RegisterRequest struct {
 type RegisterResponse struct {
 	Token string `json:"token"`
 }
+
